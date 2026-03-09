@@ -1,46 +1,26 @@
 import { useEffect } from "react";
 
 import "./App.css";
-import { socket } from "./socket.js";
 import chatSocket from "./chatSocket.js";
 
 function App() {
   useEffect(() => {
-    // socket.on('offersAvailable',(data)=>{
-    //   console.log(data);
-    // })
-    socket.on("offer", (message) => {
-      console.log(message);
-    });
+    chatSocket.connect();
 
     chatSocket.on("connected", (data) => {
       console.log(data);
     });
-  });
+
+    return () => {
+      chatSocket.off("connected");
+      chatSocket.disconnect();
+    };
+  }, []);
 
   return (
     <>
       <div>
-        <button
-          onClick={() => {
-            socket.emit("joinRoom", "madina", (confirmation) => {
-              console.log(confirmation);
-            });
-          }}
-        >
-          JoinRoom
-        </button>
-
-        <button
-          onClick={() => {
-            socket.emit("offer", {
-              room: "madina",
-              message: "We have a Offer",
-            });
-          }}
-        >
-          Send Message
-        </button>
+        <h1>Socket React Practice</h1>
         <br />
         <br />
         <button
