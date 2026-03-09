@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import "./App.css";
 import { socket } from "./socket.js";
+import chatSocket from "./chatSocket.js";
 
 function App() {
   useEffect(() => {
