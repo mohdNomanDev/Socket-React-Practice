@@ -12,6 +12,10 @@ function App() {
     socket.on("offer", (message) => {
       console.log(message);
     });
+
+    chatSocket.on("connected", (data) => {
+      console.log(data);
+    });
   });
 
   return (
@@ -36,6 +40,15 @@ function App() {
           }}
         >
           Send Message
+        </button>
+        <br />
+        <br />
+        <button
+          onClick={() => {
+            chatSocket.emit("chat", "Hello Bro");
+          }}
+        >
+          Chat Send
         </button>
       </div>
     </>
